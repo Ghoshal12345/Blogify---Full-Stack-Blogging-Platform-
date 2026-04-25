@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+        <title>Home - Blogify</title>
+        <style>
+            .blog-card {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                height: 100%;
+                border: none;
+                overflow: hidden;
+            }
+            .blog-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            }
+            .blog-card-link {
+                text-decoration: none;
+                color: inherit;
+                display: block;
+                height: 100%;
+            }
+            .blog-card-link .card-title {
+                color: #333;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                font-weight: 600;
+            }
+            .blog-card-link:hover .card-title {
+                color: #0d6efd;
+                text-decoration: underline;
+            }
+            .blog-image-container {
+                position: relative;
+                overflow: hidden;
+                height: 250px;
+            }
+            .blog-image-container img {
+                transition: transform 0.3s ease;
+            }
+            .blog-card:hover .blog-image-container img {
+                transform: scale(1.05);
+            }
+            .author-badge {
+                font-size: 0.85rem;
+                color: #6c757d;
+            }
+            .blog-excerpt {
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                line-height: 1.5;
+                height: 4.5em;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('./partials/nav') %>
+    
+    <!-- Hero Section -->
+    <div class="bg-primary text-white py-5">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3">Welcome to Blogify</h1>
+            <p class="lead">Discover stories, thinking, and expertise from writers on any topic.</p>
+        </div>
+    </div>
+
+    <!-- Blogs Grid -->
+    <div class="container mt-5 mb-5">
+        <% if (blogs.length > 0) { %>
+            <h2 class="mb-4 fw-bold">Latest Posts</h2>
+            <div class="row g-4">
+                <% blogs.forEach(blog => { %>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card blog-card shadow-sm">
+                            <a href="/blog/<%= blog._id %>" class="blog-card-link">
+                                <div class="blog-image-container">
+                                    <% if (blog.coverImageURL) { %>
+                                        <img src="<%= blog.coverImageURL %>" class="card-img-top" 
+                                            style="width: 100%; height: 250px; object-fit: cover;" 
+                                            alt="<%= blog.title %>">
+                                    <% } else { %>
+                                        <img src="/images/default blog image.png" class="card-img-top" 
+                                            style="width: 100%; height: 250px; object-fit: cover;" 
+                                            alt="Default blog image">
+                                    <% } %>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3">
+                                        <%= blog.title %>
+                                    </h5>
+                                    <p class="card-text blog-excerpt text-muted">
+                                        <%= blog.body %>
+                                    </p>
+                                    <div class="d-flex align-items-center mt-3 pt-3 border-top">
+                                        <div class="avatar-circle bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2" 
+                                            style="width: 32px; height: 32px; font-size: 0.9rem; font-weight: bold;">
+                                            <%= blog.createdBy.fullName.charAt(0).toUpperCase() %>
+                                        </div>
+                                        <div class="author-badge">
+                                            <small class="fw-semibold"><%= blog.createdBy.fullName %></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <div class="text-center py-5">
+                <i class="bi bi-journal-x" style="font-size: 4rem; color: #ccc;"></i>
+                <h3 class="mt-3 text-muted">No blogs yet</h3>
+                <p class="text-muted">Be the first to create a blog post!</p>
+                <% if (locals.user) { %>
+                    <a href="/blog/add-new" class="btn btn-primary mt-3">Create Your First Blog</a>
+                <% } %>
+            </div>
+        <% } %>
+    </div>
+
+    <%- include('./partials/script') %>
+</body>
+
+</html>

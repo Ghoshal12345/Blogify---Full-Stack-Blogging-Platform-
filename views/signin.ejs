@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+        <title>Sign In - Blogify</title>
+        <style>
+            .auth-container {
+                min-height: 80vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            .auth-card {
+                background: white;
+                border-radius: 15px;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+                overflow: hidden;
+                max-width: 450px;
+                width: 100%;
+            }
+            .auth-header {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 2rem;
+                text-align: center;
+            }
+            .auth-body {
+                padding: 2rem;
+            }
+            .form-control:focus {
+                border-color: #667eea;
+                box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+            }
+            .btn-auth {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border: none;
+                padding: 0.75rem;
+                font-weight: 600;
+                transition: transform 0.2s;
+            }
+            .btn-auth:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('./partials/nav') %>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h2 class="mb-0"><i class="bi bi-box-arrow-in-right"></i> Welcome Back</h2>
+                <p class="mb-0 mt-2">Sign in to continue to Blogify</p>
+            </div>
+            <div class="auth-body">
+                <% if (locals.errorMessage) { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill"></i> <%= locals.errorMessage %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <% } %>
+                
+                <form action="/user/signin" method="post">
+                    <div class="mb-4">
+                        <label for="email" class="form-label fw-bold">
+                            <i class="bi bi-envelope"></i> Email Address
+                        </label>
+                        <input type="email" name="email" class="form-control form-control-lg" id="email"
+                            placeholder="Enter your email" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label fw-bold">
+                            <i class="bi bi-lock"></i> Password
+                        </label>
+                        <input type="password" name="password" class="form-control form-control-lg" id="password"
+                            placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-auth w-100 btn-lg">
+                        <i class="bi bi-box-arrow-in-right"></i> Sign In
+                    </button>
+                </form>
+                
+                <div class="text-center mt-4">
+                    <p class="text-muted">Don't have an account? <a href="/user/signup" class="fw-bold text-decoration-none">Sign Up</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <%- include('./partials/script') %>
+</body>
+
+</html>

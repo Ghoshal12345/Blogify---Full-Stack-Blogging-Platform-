@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+        <title>Sign Up - Blogify</title>
+        <style>
+            .auth-container {
+                min-height: 80vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            .auth-card {
+                background: white;
+                border-radius: 15px;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+                overflow: hidden;
+                max-width: 450px;
+                width: 100%;
+            }
+            .auth-header {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 2rem;
+                text-align: center;
+            }
+            .auth-body {
+                padding: 2rem;
+            }
+            .form-control:focus {
+                border-color: #667eea;
+                box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+            }
+            .btn-auth {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border: none;
+                padding: 0.75rem;
+                font-weight: 600;
+                transition: transform 0.2s;
+            }
+            .btn-auth:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('./partials/nav') %>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h2 class="mb-0"><i class="bi bi-person-plus"></i> Create Account</h2>
+                <p class="mb-0 mt-2">Join Blogify and start sharing your stories</p>
+            </div>
+            <div class="auth-body">
+                <form action="/user/signup" method="post">
+                    <div class="mb-4">
+                        <label for="fullName" class="form-label fw-bold">
+                            <i class="bi bi-person"></i> Full Name
+                        </label>
+                        <input type="text" name="fullName" class="form-control form-control-lg" id="fullName"
+                            placeholder="Enter your full name" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="form-label fw-bold">
+                            <i class="bi bi-envelope"></i> Email Address
+                        </label>
+                        <input type="email" name="email" class="form-control form-control-lg" id="email"
+                            placeholder="Enter your email" required>
+                        <div class="form-text"><i class="bi bi-shield-check"></i> We'll never share your email with anyone else.</div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label fw-bold">
+                            <i class="bi bi-lock"></i> Password
+                        </label>
+                        <input type="password" name="password" class="form-control form-control-lg" id="password"
+                            placeholder="Create a strong password" required minlength="6">
+                        <div class="form-text"><i class="bi bi-info-circle"></i> Minimum 6 characters required.</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-auth w-100 btn-lg">
+                        <i class="bi bi-person-plus"></i> Create Account
+                    </button>
+                </form>
+                
+                <div class="text-center mt-4">
+                    <p class="text-muted">Already have an account? <a href="/user/signin" class="fw-bold text-decoration-none">Sign In</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <%- include('./partials/script') %>
+</body>
+
+</html>
