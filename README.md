@@ -1,4 +1,4 @@
-# 📝 BlogSpace — Full Stack Blogging Application
+# 📝 Blogify — Full Stack Blogging Application
 
 <div align="center">
 
