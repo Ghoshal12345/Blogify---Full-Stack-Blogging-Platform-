@@ -9,8 +9,8 @@ function cookieAuthentication(req, res, next){
     }
 
     try{
-        const userPayload= verifyToken(token)
-        req.user=userPayload;
+        const user= verifyToken(token)
+        req.user=user;
         // console.log('User payload added to req:', userPayload);
     }
     catch(err){

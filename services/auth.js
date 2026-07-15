@@ -16,9 +16,9 @@ function generateToken(user){
     return token;
 }
 function verifyToken(token){
-    const payload= jsonwebtoken.verify(token, JWT_SECRET);
+    const user= jsonwebtoken.verify(token, JWT_SECRET);
     // console.log(payload);
-    return payload;
+    return user;
 }
 
 export{
