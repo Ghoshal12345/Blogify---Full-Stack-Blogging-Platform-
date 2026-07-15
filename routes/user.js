@@ -25,7 +25,7 @@ UserRouter.post('/signin', async (req, res) => {
 })
 
 UserRouter.get('/signout', (req, res)=>{
-    return res.clearCookie('token').redirect('/');
+    return res.clearCookie('token').redirect('/user/signin');
 })
 
 UserRouter.post('/signup', async (req, res) => {
@@ -35,6 +35,6 @@ UserRouter.post('/signup', async (req, res) => {
         email: email,
         password: password,
     })
-    return res.redirect('/');
+    return res.redirect('/user/signin');
 })
 export default UserRouter;

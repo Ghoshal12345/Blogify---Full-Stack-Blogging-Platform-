@@ -3,6 +3,7 @@ import multer from 'multer';
 import path from 'path';
 import Blog from '../models/blog.js';
 import Comment from '../models/comment.js'
+import { requireAuth } from '../middlewares/authention.js';
 
 const router = express.Router();
 
@@ -17,10 +18,10 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage })
 
-router.get('/add-new', (req, res) => {
+router.get('/add-new',requireAuth,  (req, res) => {
     res.render('addBlog')
 })
-router.post('/', upload.single('coverImage'), async (req, res) => {
+router.post('/',requireAuth,  upload.single('coverImage'), async (req, res) => {//adding new post
 
     try {
         const blog = await Blog.create({
@@ -46,7 +47,7 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-router.post('/comment/:blogId', async (req, res)=>{
+router.post('/comment/:blogId',requireAuth, async (req, res)=>{
     console.log(req.body.content);
     console.log(req.params.blogId);
     console.log(req.user._id);
