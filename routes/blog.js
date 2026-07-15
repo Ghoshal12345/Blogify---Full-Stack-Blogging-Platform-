@@ -29,7 +29,7 @@ router.post('/', upload.single('coverImage'), async (req, res) => {
             createdBy: req.user._id,
             coverImageURL: req.file ? `/uploads/${req.file.filename}` : null
         })
-        console.log(req.user);
+        // console.log(req.user);
         res.redirect(`/blog/${blog._id}`);
     } catch (err) {
         res.status(500).send("Something went wrong");
@@ -56,7 +56,7 @@ router.post('/comment/:blogId', async (req, res)=>{
             blogId: req.params.blogId,
             createdBy: req.user._id,
         })
-        console.log(comment);
+        // console.log(comment);
         res.redirect(`/blog/${req.params.blogId}`)
     }catch(err){
         res.status(500).send("Could not add comment");

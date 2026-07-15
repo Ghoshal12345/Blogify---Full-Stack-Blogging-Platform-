@@ -14,8 +14,6 @@ function generateToken(user){
     };
     const token= jsonwebtoken.sign(payload, JWT_SECRET);
     return token;
-
-    
 }
 function verifyToken(token){
     const payload= jsonwebtoken.verify(token, JWT_SECRET);

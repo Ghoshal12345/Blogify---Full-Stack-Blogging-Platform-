@@ -32,19 +32,19 @@ const userSchema= new mongoose.Schema({
 },{timestamps: true});
 
 userSchema.pre('save', async function(){
-    const user= this;//here this refers to the user document being saved
+    const user= this;//here 'this' refers to the user document being saved
 
     if(!user.isModified('password')) return;
 
     const salt= randomBytes(16).toString();
-    const hashedPassword= createHmac('sha256', salt)
+    const hashedPassword= createHmac('sha256', salt) //hashedPassword-->irreversible 64-character hexadecimal string
         .update(user.password)
         .digest('hex');
 
     this.salt= salt;
     this.password= hashedPassword;
-    console.log(salt);
-    console.log(hashedPassword);
+    // console.log(salt);
+    // console.log(hashedPassword);
 })
 
 // mongoose virtual function

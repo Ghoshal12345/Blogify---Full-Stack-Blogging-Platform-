@@ -36,6 +36,5 @@ UserRouter.post('/signup', async (req, res) => {
         password: password,
     })
     return res.redirect('/');
-
 })
 export default UserRouter;
