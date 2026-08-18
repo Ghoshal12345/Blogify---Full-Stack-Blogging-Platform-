@@ -41,6 +41,7 @@ mongoose.connect(process.env.MONGO_URI, {
     console.error("❌ MongoDB connection failed:", err.message);
 });
 
+// routes
 app.get('/', async (req, res)=>{
     try {
         const allBlogs = await Blog.find({}).sort({createdAt: -1}).populate('createdBy');
