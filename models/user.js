@@ -47,7 +47,7 @@ userSchema.pre('save', async function(){
     // console.log(hashedPassword);
 })
 
-// mongoose virtual function
+// mongoose virtual function to hide the salt and password fields when converting the user document to JSON
 userSchema.static('matchPassword', async function(email, password){
     const user= await this.findOne({email: email}).select('+salt +password');// 'this' refers to the User model
     if(!user) throw new Error('User not found');
